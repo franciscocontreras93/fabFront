@@ -9,9 +9,9 @@ import { DistritosService } from './services/distritos.service';
 })
 export class MapComponent implements AfterViewInit {
   
-
+  private map:any;
   private initMap() {
-    const map = L.map('map', {
+    this.map = L.map('map', {
       center: [-12.90402, -74.26936],
       zoom: 13
     });
@@ -22,8 +22,8 @@ export class MapComponent implements AfterViewInit {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
-    osmTiles.addTo(map);
-    this.polService.makeDistritosPolygon(map)
+    osmTiles.addTo(this.map);
+    
 
   }
 
@@ -34,6 +34,9 @@ export class MapComponent implements AfterViewInit {
   ngAfterViewInit(): void {
 
     this.initMap()
+    this.polService.makeDistritosPolygon(this.map)
+
+    
     
 
     
